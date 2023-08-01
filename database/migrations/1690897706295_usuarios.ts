@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('nome').notNullable()
       table.bigInteger('matricula').notNullable().unique()
       table.string('email').notNullable().unique()
-      table.string('senha').notNullable()
+      table.string('password').notNullable()
       table.date('data_de_nascimento').notNullable()
       table.boolean('is_professor').notNullable()
       /**

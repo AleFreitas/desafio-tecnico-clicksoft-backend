@@ -7,7 +7,7 @@ const bodyValido = {
   nome: 'aluno válido',
   matricula: '1234',
   email: 'aluno@gmail.com',
-  senha: 'Asda23123',
+  password: 'Asda23123',
   data_de_nascimento: '2000-07-31',
 }
 
