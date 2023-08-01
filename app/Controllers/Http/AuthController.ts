@@ -6,9 +6,7 @@ export default class AuthController {
     const password = request.input('password')
 
     try {
-      const token = await auth.use('api').attempt(email, password, {
-        expiresIn: '30mins',
-      })
+      const token = await auth.use('api').attempt(email, password)
       return token
     } catch {
       return response.unauthorized('Invalid credentials')
