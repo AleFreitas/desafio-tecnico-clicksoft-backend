@@ -37,4 +37,6 @@ Route.group(() => {
 
   //rota que edita dados de um usuário aluno/professor
   Route.patch('/usuario', 'UsuariosController.update').middleware('auth')
+  //rota que mostra dados de um usuário aluno/professor
+  Route.get('/usuario', 'UsuariosController.show').middleware('auth')
 }).prefix('/api')

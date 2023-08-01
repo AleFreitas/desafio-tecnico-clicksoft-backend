@@ -9,4 +9,15 @@ export default class UsuariosController {
     const usuario = await Usuario.findOrFail(auth.user?.id)
     return await updateUsuario(body, usuario)
   }
+
+  public async show({ auth, request, response }: HttpContextContract) {
+    const usuario = await Usuario.findOrFail(auth.user?.id)
+    const { nome, matricula, email } = usuario
+    return {
+      nome,
+      matricula,
+      email,
+      nascimento: usuario.data_de_nascimento,
+    }
+  }
 }
