@@ -39,4 +39,6 @@ Route.group(() => {
   Route.patch('/usuario', 'UsuariosController.update').middleware('auth')
   //rota que mostra dados de um usuário aluno/professor
   Route.get('/usuario', 'UsuariosController.show').middleware('auth')
+  //rota que deleta um usuário aluno/professor
+  Route.delete('/usuario', 'UsuariosController.destroy').middleware('auth')
 }).prefix('/api')

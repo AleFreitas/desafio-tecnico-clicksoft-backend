@@ -20,4 +20,10 @@ export default class UsuariosController {
       nascimento: usuario.data_de_nascimento,
     }
   }
+
+  public async destroy({ auth, request, response }: HttpContextContract) {
+    const usuario = await Usuario.findOrFail(auth.user?.id)
+    await usuario.delete()
+    response.status(205)
+  }
 }
