@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import Aluno from 'App/Models/Aluno'
+import Usuario from 'App/Models/Usuario'
 
 const url = '/api/aluno'
 
@@ -14,7 +14,7 @@ const bodyValido = {
 test.group('Aluno store', () => {
   test('deveria criar o usuário corretamente', async ({ client }) => {
     const response = await client.post(url).json(bodyValido)
-    let aluno = await Aluno.findBy('email', bodyValido.email)
+    let aluno = await Usuario.findBy('email', bodyValido.email)
     let criadoNoBd = false
     if (aluno) criadoNoBd = true
     response.assert?.equal(criadoNoBd, true)

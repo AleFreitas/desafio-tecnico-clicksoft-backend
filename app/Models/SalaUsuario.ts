@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, column, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Sala from './Sala'
-import Professor from './Professor'
+import Usuario from './Usuario'
 
-export default class SalaProfessor extends BaseModel {
+export default class SalaUsuario extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -20,12 +20,12 @@ export default class SalaProfessor extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Sala, {
-    foreignKey: 'id_sala', // Chave estrangeira referenciando a tabela "salas"
+    foreignKey: 'id_sala',
   })
   public sala: BelongsTo<typeof Sala>
 
-  @belongsTo(() => Professor, {
-    foreignKey: 'id_professor', // Chave estrangeira referenciando a tabela "professors"
+  @belongsTo(() => Usuario, {
+    foreignKey: 'id_professor',
   })
-  public professor: BelongsTo<typeof Professor>
+  public professor: BelongsTo<typeof Usuario>
 }

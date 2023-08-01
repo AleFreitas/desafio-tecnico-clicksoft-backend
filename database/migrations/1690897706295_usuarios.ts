@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'professores'
+  protected tableName = 'usuarios'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('email').notNullable().unique()
       table.string('senha').notNullable()
       table.date('data_de_nascimento').notNullable()
+      table.boolean('is_professor').notNullable()
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

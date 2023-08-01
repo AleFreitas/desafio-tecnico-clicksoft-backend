@@ -1,8 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Sala from './Sala'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Aluno extends BaseModel {
+export default class Usuario extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -18,20 +17,15 @@ export default class Aluno extends BaseModel {
   @column()
   public senha: string
 
-  @column()
-  public num_sala: number
-
   @column.date()
   public data_de_nascimento: DateTime
+
+  @column()
+  public is_professor: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @belongsTo(() => Sala, {
-    foreignKey: 'num_sala',
-  })
-  public sala: BelongsTo<typeof Sala>
 }
