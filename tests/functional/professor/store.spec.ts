@@ -18,7 +18,10 @@ test.group('Professor store', () => {
     let criadoNoBd = false
     if (professor) criadoNoBd = true
     response.assertStatus(201)
-    response.assertBodyContains({ message: 'professor cadastrado' })
+    response.assertBodyContains({
+      message: 'professor cadastrado',
+      professor: { isProfessor: true },
+    })
     response.assert?.equal(criadoNoBd, true)
   })
 

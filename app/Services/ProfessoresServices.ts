@@ -12,5 +12,7 @@ export async function storeProfessor(body: Partial<Usuario>) {
   }
 
   body.is_professor = true
-  await Usuario.create(body)
+  const professor = await Usuario.create(body)
+  const { nome, matricula, email } = professor
+  return { nome, matricula, email, isProfessor: professor.is_professor }
 }

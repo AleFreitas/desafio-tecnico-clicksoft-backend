@@ -19,7 +19,10 @@ test.group('Aluno store', () => {
     if (aluno) criadoNoBd = true
     response.assert?.equal(criadoNoBd, true)
     response.assertStatus(201)
-    response.assertBodyContains({ message: 'aluno cadastrado' })
+    response.assertBodyContains({
+      message: 'aluno cadastrado',
+      aluno: { isProfessor: false },
+    })
   })
 
   test('deveria retornar erro 422 ao receber matricula não numerica', async ({ client }) => {
