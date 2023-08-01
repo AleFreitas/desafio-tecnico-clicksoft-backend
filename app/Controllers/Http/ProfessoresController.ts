@@ -1,21 +1,21 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { newUsuarioSchema } from '../../Schemas/UsuarioSchemas'
-import { storeAluno } from 'App/Services/AlunosServices'
+import { storeProfessor } from 'App/Services/ProfessoresServices'
 
-export default class AlunosController {
+export default class ProfessoresController {
   public async store({ request, response }: HttpContextContract) {
     await request.validate({ schema: newUsuarioSchema })
     const body = request.body()
     try {
-      const aluno = await storeAluno(body)
+      const professor = await storeProfessor(body)
       response.status(201)
       return {
-        message: 'aluno cadastrado',
-        aluno,
+        message: 'professor cadastrado',
+        professor,
       }
     } catch (error) {
       response.status(error.status || 500).json({
-        error: error.message || 'erro ao cadastrar aluno',
+        error: error.message || 'erro ao cadastrar professor',
       })
     }
   }

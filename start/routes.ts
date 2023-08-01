@@ -21,20 +21,17 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
+  //rota que testa se a api foi inicializada corretamente
   Route.get('/', async () => {
     return { hello: 'world' }
   })
-  Route.post('login', async ({ auth, request, response }) => {
-    const email = request.input('email')
-    const password = request.input('password')
 
-    try {
-      const token = await auth.use('api').attempt(email, password)
-      return token
-    } catch {
-      return response.unauthorized('Invalid credentials')
-    }
-  })
+  //rota que realiza login de usuário
+  Route.post('login', 'AuthController.login')
 
+  //rota que cadastra um usuário como aluno
   Route.resource('/aluno', 'AlunosController').apiOnly()
+
+  //rota que cadastra um usuário como professor
+  Route.resource('/professor', 'ProfessoresController').apiOnly()
 }).prefix('/api')
