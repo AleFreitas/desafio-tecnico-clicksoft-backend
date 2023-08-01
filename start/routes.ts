@@ -24,4 +24,6 @@ Route.group(() => {
   Route.get('/', async () => {
     return { hello: 'world' }
   })
+
+  Route.resource('/aluno', 'AlunosController').apiOnly()
 }).prefix('/api')
