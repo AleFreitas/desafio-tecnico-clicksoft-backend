@@ -31,6 +31,7 @@ Route.group(() => {
 
   //rota que cadastra um usuário como aluno
   Route.resource('/aluno', 'AlunosController').apiOnly()
+  Route.patch('/aluno', 'AlunosController.update').middleware('auth')
 
   //rota que cadastra um usuário como professor
   Route.resource('/professor', 'ProfessoresController').apiOnly()
