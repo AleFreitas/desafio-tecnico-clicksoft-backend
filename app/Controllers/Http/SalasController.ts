@@ -9,7 +9,7 @@ export default class SalasController {
     const usuario = await Usuario.findOrFail(auth.user?.id)
     const body = request.body()
     try {
-      const sala = await storeSala(body, usuario.is_professor)
+      const sala = await storeSala(body, usuario)
       response.status(201)
       return sala
     } catch (error) {
