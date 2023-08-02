@@ -41,4 +41,7 @@ Route.group(() => {
   Route.get('/usuario', 'UsuariosController.show').middleware('auth')
   //rota que deleta um usuário aluno/professor
   Route.delete('/usuario', 'UsuariosController.destroy').middleware('auth')
+
+  //rota que cadastra uma sala
+  Route.post('/sala', 'SalasController.store').middleware('auth')
 }).prefix('/api')
