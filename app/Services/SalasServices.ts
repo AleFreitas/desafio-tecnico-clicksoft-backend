@@ -1,4 +1,5 @@
 import { Exception } from '@adonisjs/core/build/standalone'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Sala from 'App/Models/Sala'
 import SalaUsuario from 'App/Models/SalaUsuario'
 import Usuario from 'App/Models/Usuario'
@@ -30,4 +31,20 @@ export async function showSala(num: number, professor: boolean) {
   } else {
     throw new Exception('Usuário não é um professor', 401)
   }
+}
+
+export async function updateSala(body, sala: Sala) {
+  const numeroUsuariosNaSala = await Database.from('sala_usuarios')
+    .count('*')
+    .where('id_sala', Number(sala.numero))
+    .first()
+  const numeroAlunos = numeroUsuariosNaSala - 1
+  if (numeroAlunos > body.capacidade) {
+    throw new Exception('Impossivel Reduzir capacidade, remova alguns alunos!', 400)
+  }
+  if (body.capacidade) {
+    sala.capacidade = body.capacidade
+  }
+  await sala.save()
+  return sala
 }
