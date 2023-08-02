@@ -46,4 +46,6 @@ Route.group(() => {
   Route.post('/sala', 'SalasController.store').middleware('auth')
   //rota que consulta uma sala
   Route.get('/sala/:id', 'SalasController.show').middleware('auth')
+  //rota que deleta uma sala
+  Route.delete('/sala/:id', 'SalasController.destroy').middleware('auth')
 }).prefix('/api')

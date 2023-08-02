@@ -1,4 +1,6 @@
+import { Exception } from '@adonisjs/core/build/standalone'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Sala from 'App/Models/Sala'
 import Usuario from 'App/Models/Usuario'
 import { newSalaSchema } from 'App/Schemas/SalaSchemas'
 import { showSala, storeSala } from 'App/Services/SalasServices'
@@ -30,5 +32,14 @@ export default class SalasController {
         error: error.message || 'erro ao cadastrar sala',
       })
     }
+  }
+
+  public async destroy({ auth, response, params }: HttpContextContract) {
+    const usuario = await Usuario.findOrFail(auth.user?.id)
+    const sala = await Sala.findBy('numero', params.id)
+    if (!sala) throw new Exception('sala não existe', 400)
+    if (!usuario.is_professor) throw new Exception('Usuário não é um professor', 401)
+    await sala.delete()
+    response.status(205)
   }
 }
