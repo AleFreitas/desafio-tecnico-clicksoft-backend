@@ -44,4 +44,6 @@ Route.group(() => {
 
   //rota que cadastra uma sala
   Route.post('/sala', 'SalasController.store').middleware('auth')
+  //rota que consulta uma sala
+  Route.get('/sala/:id', 'SalasController.show').middleware('auth')
 }).prefix('/api')
