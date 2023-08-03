@@ -78,12 +78,13 @@ Agora você está pronto para testar minha solução e explorar os recursos impl
 
 Implementei alguns testes automatizados utilizando a ferramenta japa do AdonisJs que verificam as funcionalidades do código.
 
-para iniciá-los execute o seguinte comando
+para iniciá-los, altere o ```NODE_ENV``` no seu arquivo .env para ```NODE_ENV=test``` ou crie um .env.test e o configure. Depois é só executar o seguinte comando
    ```sh
    node ace test --watch
    ```
 
 o retorno deve ser como o da imagem a seguir
+
 ![image](https://github.com/AleFreitas/desafio-tecnico-clicksoft-backend/assets/83618808/16918c27-6172-4c7d-88f5-1911fded8bd9)
 
 ## Arquitetura
