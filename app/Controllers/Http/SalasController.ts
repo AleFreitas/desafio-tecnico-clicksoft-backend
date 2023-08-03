@@ -11,6 +11,7 @@ import {
   storeSala,
   updateSala,
 } from 'App/Services/SalasServices'
+import { getProfessorNaSala } from 'App/utils/SalaUtils'
 
 export default class SalasController {
   public async store({ auth, request, response }: HttpContextContract) {
@@ -102,5 +103,32 @@ export default class SalasController {
       }
     })
     return retorno
+  }
+
+  public async getSalas({ auth }: HttpContextContract) {
+    const usuario = await Usuario.findOrFail(auth.user?.id)
+    if (usuario.is_professor) throw new Exception('Usuário não é um aluno', 401)
+    const salasDoAluno = await Database.rawQuery(
+      `
+        SELECT s.*
+        FROM salas s
+        JOIN sala_usuarios su ON s.id = su.id_sala
+        WHERE su.id_usuario = ?
+      `,
+      [usuario.id]
+    )
+    const salas = await Promise.all(
+      salasDoAluno.rows.map(async (i) => {
+        const prof = await getProfessorNaSala(i.id)
+        return {
+          numero: i.numero,
+          professor: prof.nome,
+        }
+      })
+    )
+    return {
+      nome: usuario.nome,
+      salas,
+    }
   }
 }
