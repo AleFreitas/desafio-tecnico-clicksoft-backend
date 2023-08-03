@@ -56,7 +56,7 @@ export async function alocaAlunoService(body, usuario: Usuario) {
   if (!aluno) throw new Exception('aluno não existe', 400)
   if (aluno.is_professor) throw new Exception('não é possivel alocar um professor', 401)
   const professor = await getProfessorNaSala(sala.id)
-  if (professor.id !== usuario.id){
+  if (professor.id !== usuario.id) {
     throw new Exception('apenas o criador da sala pode alocar alunos', 401)
   }
   const alunoSalaRepetida = await Database.from('sala_usuarios')
@@ -80,4 +80,29 @@ export async function alocaAlunoService(body, usuario: Usuario) {
     id_usuario: BigInt(aluno.id),
   })
   return { sala: sala.numero, aluno: aluno.nome }
+}
+
+export async function desalocaAlunoService(body, usuario: Usuario) {
+  console.log('oi')
+  const sala = await Sala.findBy('numero', body.numero)
+  const aluno = await Usuario.findBy('matricula', body.matricula)
+
+  if (!sala) throw new Exception('sala não existe', 400)
+  if (!aluno) throw new Exception('aluno não existe', 400)
+  if (aluno.is_professor) throw new Exception('não é possivel desalocar um professor', 401)
+  const professor = await getProfessorNaSala(sala.id)
+  if (professor.id !== usuario.id) {
+    throw new Exception('apenas o criador da sala pode desalocar alunos', 401)
+  }
+  const alunoNaSala = await Database.from('sala_usuarios')
+    .where('id_sala', sala.id)
+    .where('id_usuario', aluno.id)
+  if (alunoNaSala.length === 0) throw new Exception('este aluno não esta inscrito nesta sala', 400)
+  await Database.rawQuery(
+    `
+      DELETE FROM sala_usuarios
+      WHERE id_sala = ? and id_usuario = ?
+    `,
+    [sala.id, aluno.id]
+  )
 }

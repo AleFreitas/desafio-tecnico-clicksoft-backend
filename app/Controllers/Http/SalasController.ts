@@ -3,7 +3,13 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Sala from 'App/Models/Sala'
 import Usuario from 'App/Models/Usuario'
 import { alocaAlunoSchema, newSalaSchema, patchSalaSchema } from 'App/Schemas/SalaSchemas'
-import { alocaAlunoService, showSala, storeSala, updateSala } from 'App/Services/SalasServices'
+import {
+  alocaAlunoService,
+  desalocaAlunoService,
+  showSala,
+  storeSala,
+  updateSala,
+} from 'App/Services/SalasServices'
 
 export default class SalasController {
   public async store({ auth, request, response }: HttpContextContract) {
@@ -62,5 +68,12 @@ export default class SalasController {
     const usuario = await Usuario.findOrFail(auth.user?.id)
     if (!usuario.is_professor) throw new Exception('Usuário não é um professor', 401)
     return alocaAlunoService(body, usuario)
+  }
+
+  public async desalocaAluno({ auth, request }: HttpContextContract) {
+    const body = await request.validate({ schema: alocaAlunoSchema })
+    const usuario = await Usuario.findOrFail(auth.user?.id)
+    if (!usuario.is_professor) throw new Exception('Usuário não é um professor', 401)
+    return desalocaAlunoService(body, usuario)
   }
 }
