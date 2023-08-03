@@ -55,4 +55,6 @@ Route.group(() => {
   Route.post('/sala/alocar', 'SalasController.alocaAluno').middleware('auth')
   //rota que desaloca um aluno em uma sala
   Route.post('/sala/desalocar', 'SalasController.desalocaAluno').middleware('auth')
+  //rota que consulta todos os alunos de uma sala
+  Route.get('/sala/alunos/:id', 'SalasController.getAlunos').middleware('auth')
 }).prefix('/api')

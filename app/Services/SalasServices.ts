@@ -83,7 +83,6 @@ export async function alocaAlunoService(body, usuario: Usuario) {
 }
 
 export async function desalocaAlunoService(body, usuario: Usuario) {
-  console.log('oi')
   const sala = await Sala.findBy('numero', body.numero)
   const aluno = await Usuario.findBy('matricula', body.matricula)
 
