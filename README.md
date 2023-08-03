@@ -74,11 +74,29 @@ Com o ambiente configurado, você está pronto para executar o servidor e testar
 
 Agora você está pronto para testar minha solução e explorar os recursos implementados!
 
+## Testes Automatizados
+
+Implementei alguns testes automatizados utilizando a ferramenta japa do AdonisJs que verificam as funcionalidades do código.
+
+para iniciá-los execute o seguinte comando
+   ```sh
+   node ace test --watch
+   ```
+
+o retorno deve ser como o da imagem a seguir
+![image](https://github.com/AleFreitas/desafio-tecnico-clicksoft-backend/assets/83618808/16918c27-6172-4c7d-88f5-1911fded8bd9)
+
+## Arquitetura
+A arquitetura implementada neste projeto foi a arquitetura de tres camadas adaptada ao contexto do desafio que era de uma api.
+Uma camada extra de ORM foi adicionada para desacoplar ainda mais o sistema e isolar as regras de negócio
+
+Uma visão mais geral da arquitetura pode ser encontrada na imagem abaixo:
+![image](https://github.com/AleFreitas/desafio-tecnico-clicksoft-backend/assets/83618808/0419a0b2-e7df-4536-a18a-fd9c862ff4a8)
+
 ## Banco de Dados
 
 A estrutura do banco de dados utilizada no projeto pode ser visualizada na imagem abaixo:
-
-![Banco de Dados](https://github.com/AleFreitas/desafio-tecnico-clicksoft-backend/assets/83618808/2afd7524-46eb-4503-bb84-e698ce9a2e91)
+![image](https://github.com/AleFreitas/desafio-tecnico-clicksoft-backend/assets/83618808/bc114391-e45b-40bd-884e-332e37379542)
 
 ## Requisitos Funcionais
 
