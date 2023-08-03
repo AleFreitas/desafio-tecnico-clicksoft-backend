@@ -50,4 +50,7 @@ Route.group(() => {
   Route.delete('/sala/:id', 'SalasController.destroy').middleware('auth')
   //rota que edita dados de uma sala
   Route.patch('/sala/:id', 'SalasController.update').middleware('auth')
+
+  //rota que aloca um aluno em uma sala
+  Route.post('/sala/alocar', 'SalasController.alocaAluno').middleware('auth')
 }).prefix('/api')

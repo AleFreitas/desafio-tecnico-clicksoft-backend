@@ -11,7 +11,7 @@ export default class SalaUsuario extends BaseModel {
   public id_sala: bigint
 
   @column()
-  public id_professor: bigint
+  public id_usuario: bigint
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -25,7 +25,7 @@ export default class SalaUsuario extends BaseModel {
   public sala: BelongsTo<typeof Sala>
 
   @belongsTo(() => Usuario, {
-    foreignKey: 'id_professor',
+    foreignKey: 'id_usuario',
   })
-  public professor: BelongsTo<typeof Usuario>
+  public usuario: BelongsTo<typeof Usuario>
 }

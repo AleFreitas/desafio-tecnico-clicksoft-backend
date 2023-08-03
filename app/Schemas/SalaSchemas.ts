@@ -8,3 +8,8 @@ export const newSalaSchema = schema.create({
 export const patchSalaSchema = schema.create({
   capacidade: schema.number(),
 })
+
+export const alocaAlunoSchema = schema.create({
+  matricula: schema.number(),
+  numero: schema.number(),
+})
