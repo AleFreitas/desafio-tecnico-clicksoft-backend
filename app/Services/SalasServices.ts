@@ -3,7 +3,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Sala from 'App/Models/Sala'
 import SalaUsuario from 'App/Models/SalaUsuario'
 import Usuario from 'App/Models/Usuario'
-import { checkNumeroSala, getAlunosNaSala } from 'App/utils/SalaUtils'
+import { checkNumeroSala, getAlunosNaSala, getProfessorNaSala } from 'App/utils/SalaUtils'
 
 export async function storeSala(body: Partial<Sala>, usuario: Usuario) {
   await checkNumeroSala(body.numero)
@@ -55,7 +55,10 @@ export async function alocaAlunoService(body, usuario: Usuario) {
   if (!sala) throw new Exception('sala não existe', 400)
   if (!aluno) throw new Exception('aluno não existe', 400)
   if (aluno.is_professor) throw new Exception('não é possivel alocar um professor', 401)
-
+  const professor = await getProfessorNaSala(sala.id)
+  if (professor.id !== usuario.id){
+    throw new Exception('apenas o criador da sala pode alocar alunos', 401)
+  }
   const alunoSalaRepetida = await Database.from('sala_usuarios')
     .where('id_sala', sala.id)
     .where('id_usuario', aluno.id)

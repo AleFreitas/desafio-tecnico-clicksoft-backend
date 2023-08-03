@@ -19,3 +19,17 @@ export async function getAlunosNaSala(sala_id) {
   )
   return numeroUsuariosNaSala.rows.length
 }
+
+export async function getProfessorNaSala(sala_id) {
+  const professorNaSala = await Database.rawQuery(
+    `
+      SELECT u.*
+      FROM usuarios u
+      JOIN sala_usuarios su ON u.id = su.id_usuario
+      WHERE su.id_sala = ? AND u.is_professor = true;
+    `,
+    [sala_id]
+  )
+  const professor = professorNaSala.rows
+  return professor[0]
+}
