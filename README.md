@@ -78,7 +78,7 @@ Agora você está pronto para testar minha solução e explorar os recursos impl
 
 Implementei alguns testes automatizados utilizando a ferramenta japa do AdonisJs que verificam as funcionalidades do código.
 
-para iniciá-los, altere o ```NODE_ENV``` no seu arquivo .env para ```NODE_ENV=test``` ou crie um .env.test e o configure. Depois é só executar o seguinte comando
+para iniciá-los, crie um .env.test na raiz do projeto e o configure como no .env.example mas com ```NODE_ENV=test```. Depois é só executar o seguinte comando
    ```sh
    node ace test --watch
    ```
